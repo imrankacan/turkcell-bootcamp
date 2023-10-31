@@ -2,6 +2,8 @@ package com.turkcell.spring.starter.controllers;
 
 import com.turkcell.spring.starter.business.CategoryService;
 import com.turkcell.spring.starter.entities.Category;
+import com.turkcell.spring.starter.entities.dtos.CategoryForAddDto;
+import com.turkcell.spring.starter.entities.dtos.CategoryForListingDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,8 @@ public class CategoriesController {
 
     private final CategoryService categoryService;
 
-    public CategoriesController(CategoryService categoryService) {
+    public CategoriesController(CategoryService categoryService)
+    {
         this.categoryService = categoryService;
     }
 
@@ -29,11 +32,12 @@ public class CategoriesController {
 
 
     @GetMapping()
-    public List<Category> getCategories()
+    public List<CategoryForListingDto> getCategories()
     {
         //List<Category>categoriesInDb = categoryRepositories.findAll();
         //return categoriesInDb;
-        return null;
+        List<CategoryForListingDto>categoriesInDb = categoryService.getAll();
+        return categoriesInDb;
 
     }
 
@@ -78,6 +82,18 @@ public class CategoriesController {
     public ResponseEntity add(@RequestBody Category category){
         //categoryRepositories.save(category);
         return new ResponseEntity("Kategory Eklendi", HttpStatus.CREATED);
+    }
+
+    @PostMapping()
+    public ResponseEntity add(@RequestBody CategoryForAddDto request){
+        //Manuel Mapleme
+        Category category = new Category();
+        category.setCategoryName(request.getCategoryName());
+        category.setDescription(request.getDescription());
+        //AutoMapper => ModelMapper
+        return new ResponseEntity("Kategori Eklendi", HttpStatus.CREATED);
+
+
     }
 
 }
