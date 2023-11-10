@@ -1,10 +1,7 @@
 package com.turkcell.spring.starter.controllers;
 
-import com.turkcell.spring.starter.entities.Category;
-import com.turkcell.spring.starter.entities.Product;
-import com.turkcell.spring.starter.repositories.ProductRepositories;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.turkcell.spring.starter.business.ProductService;
+import com.turkcell.spring.starter.entities.dtos.ProductForListingDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +10,24 @@ import java.util.List;
 @RequestMapping("products")
 public class ProductsController {
 
-    private ProductRepositories productRepositories;
-    public ProductsController(ProductRepositories productRepositories) {
+    //private ProductRepositories productRepositories;
+
+    private final ProductService productService;
+
+    public ProductsController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @GetMapping()
+    public List<ProductForListingDto> getProducts()
+    {
+        List<ProductForListingDto>productsInDb = productService.getAll();
+        return productsInDb;
+
+    }
+
+
+   /* public ProductsController(ProductRepositories productRepositories) {
         this.productRepositories = productRepositories;
     }
     @GetMapping("getById")
@@ -38,6 +51,6 @@ public class ProductsController {
     }
     //http://localhost:8080/products/getByProductName?name=Chai
 
-
+*/
 
 }
