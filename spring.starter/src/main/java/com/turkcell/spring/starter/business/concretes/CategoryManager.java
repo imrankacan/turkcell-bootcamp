@@ -1,6 +1,9 @@
 package com.turkcell.spring.starter.business.concretes;
 
 import com.turkcell.spring.starter.business.abstracts.CategoryService;
+import com.turkcell.spring.starter.business.exceptions.BusinessException;
+import com.turkcell.spring.starter.entities.Category;
+import com.turkcell.spring.starter.entities.dtos.CategoryForAddDto;
 import com.turkcell.spring.starter.entities.dtos.CategoryForListingDto;
 import com.turkcell.spring.starter.repositories.CategoryRepositories;
 import org.springframework.stereotype.Service;
@@ -34,5 +37,27 @@ public class CategoryManager implements CategoryService {
 
          */
         return categoryRepositories.getForListing();
+    }
+
+    @Override
+    public void add(CategoryForAddDto request) {
+
+
+        categoryWithSameNameSouldNotExist(request.getCategoryName());
+        Category category = new Category();
+        category.setCategoryName(request.getCategoryName());
+        category.setDescription(request.getDescription());
+        //Mapleme İşlemi Business te
+        categoryRepositories.save(category);
+    }
+    private void categoryWithSameNameSouldNotExist(String categoryName){
+        //Business Rule => Aynı isimde iki kategory olmamalı
+
+        Category categoryWithSameName = categoryRepositories.findByCategoryName(categoryName);
+        if(categoryWithSameName !=null) {
+            //Business Kuralı Hatası
+            throw new BusinessException("Aynı kategori isminden iki adet bulunamaz");
+        }
+
     }
 }

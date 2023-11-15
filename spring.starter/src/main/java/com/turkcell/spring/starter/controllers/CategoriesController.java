@@ -88,9 +88,8 @@ public class CategoriesController {
     @PostMapping()
     public ResponseEntity add(@RequestBody @Valid CategoryForAddDto request){
         //Manuel Mapleme
-        Category category = new Category();
-        category.setCategoryName(request.getCategoryName());
-        category.setDescription(request.getDescription());
+        categoryService.add(request);
+
         //AutoMapper => ModelMapper
         return new ResponseEntity("Kategori Eklendi", HttpStatus.CREATED);
 

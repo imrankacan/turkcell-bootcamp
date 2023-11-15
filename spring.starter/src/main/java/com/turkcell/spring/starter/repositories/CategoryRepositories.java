@@ -12,8 +12,12 @@ import java.util.List;
 public interface CategoryRepositories extends JpaRepository<Category,Integer > { //Hangi model için veriye erişim sağlamak istiyoruz, id veri türü
 
     // Spring Derived Query Method
-    List<Category> findByCategoryName(String CategoryName); //JPA isteğe uygun işlemi gerçekleştirir. (name ile arama yapma)
+    /////
+    //List<Category> findByCategoryName(String CategoryName); //JPA isteğe uygun işlemi gerçekleştirir. (name ile arama yapma)
     List<Category> findByCategoryIdLessThan(int id); // Kategori id si verilen id den küçük olanlar
+
+
+    Category findByCategoryName(String categoryName);
 
 
     //Native SQL
