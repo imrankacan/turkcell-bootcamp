@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-@RestControllerAdvice
 public class Application {
 
 	public static void main(String[] args) {SpringApplication.run(Application.class, args);
@@ -22,24 +21,6 @@ public class Application {
 	// Global Exception Handling
 
 	//Uygulamanın neresinden olursa olsun runtime exceptionları yakalamak için kullandığımız yöntem
-	@ExceptionHandler({MethodArgumentNotValidException.class})
-	public List<String> handleValidationException(MethodArgumentNotValidException ex){
-		List<String>errors = new ArrayList<>();
-		ex.getBindingResult().getAllErrors().forEach((objectError) -> {
-			String fieldName = ((FieldError)objectError).getField();
-			String errorMessage = objectError.getDefaultMessage();
 
-			String message = fieldName + ":"+ errorMessage;
-			errors.add(message);
-		});
-		return errors;
-
-	}
-	@ExceptionHandler({BusinessException.class})
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public String handleBusinessException(BusinessException ex){
-		return ex.getMessage();
-
-	}
 
 }
