@@ -1,9 +1,10 @@
 package com.turkcell.spring.starter.controllers;
 
-import com.turkcell.spring.starter.business.CategoryService;
+import com.turkcell.spring.starter.business.abstracts.CategoryService;
 import com.turkcell.spring.starter.entities.Category;
 import com.turkcell.spring.starter.entities.dtos.CategoryForAddDto;
 import com.turkcell.spring.starter.entities.dtos.CategoryForListingDto;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -85,7 +86,7 @@ public class CategoriesController {
     }
 
     @PostMapping()
-    public ResponseEntity add(@RequestBody CategoryForAddDto request){
+    public ResponseEntity add(@RequestBody @Valid CategoryForAddDto request){
         //Manuel Mapleme
         Category category = new Category();
         category.setCategoryName(request.getCategoryName());

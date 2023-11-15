@@ -1,15 +1,14 @@
-package com.turkcell.spring.starter.business;
+package com.turkcell.spring.starter.business.concretes;
 
-import com.turkcell.spring.starter.entities.Category;
+import com.turkcell.spring.starter.business.abstracts.CategoryService;
 import com.turkcell.spring.starter.entities.dtos.CategoryForListingDto;
 import com.turkcell.spring.starter.repositories.CategoryRepositories;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-
+//Somut Classlar
 @Service
-public class CategoryManager implements CategoryService{
+public class CategoryManager implements CategoryService {
     private final CategoryRepositories categoryRepositories; // Controller direk repository e erişememeli.
 
     public CategoryManager(CategoryRepositories categoryRepositories) {
