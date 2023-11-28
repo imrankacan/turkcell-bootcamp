@@ -1,7 +1,7 @@
 package com.turkcell.spring.starter.controllers;
 
 import com.turkcell.spring.starter.business.abstracts.ProductService;
-import com.turkcell.spring.starter.entities.dtos.ProductForListingDto;
+import com.turkcell.spring.starter.entities.dtos.product.ProductForListingDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

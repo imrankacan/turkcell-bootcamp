@@ -1,19 +1,24 @@
 package com.turkcell.spring.starter.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
+import java.util.List;
 
 @Data
 
 @Table(name = "employees")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
 
     @Id
     @Column(name="employee_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeeId;
 
     @Column(name="last_name")
@@ -66,4 +71,7 @@ public class Employee {
 
     @Column(name="photo_path")
     private String photo_path;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Order>orders;
 }

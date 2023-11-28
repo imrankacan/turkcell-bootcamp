@@ -3,8 +3,9 @@ package com.turkcell.spring.starter.business.concretes;
 import com.turkcell.spring.starter.business.abstracts.CategoryService;
 import com.turkcell.spring.starter.business.exceptions.BusinessException;
 import com.turkcell.spring.starter.entities.Category;
-import com.turkcell.spring.starter.entities.dtos.CategoryForAddDto;
-import com.turkcell.spring.starter.entities.dtos.CategoryForListingDto;
+import com.turkcell.spring.starter.entities.dtos.category.CategoryForAddDto;
+import com.turkcell.spring.starter.entities.dtos.category.CategoryForListingDto;
+import com.turkcell.spring.starter.entities.dtos.category.CategoryForUpdateDto;
 import com.turkcell.spring.starter.repositories.CategoryRepositories;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,21 @@ public class CategoryManager implements CategoryService {
         //Mapleme İşlemi Business te
         categoryRepositories.save(category);
     }
+
+    @Override
+    public void delete(int id) {
+        Category categoryToDelete = categoryRepositories.findById(id).orElse(null);
+        if(categoryToDelete==null) {
+            throw new BusinessException("Böyle Bir Kategori Bulunamamıştır.");
+        }
+        categoryRepositories.delete(categoryToDelete);
+    }
+
+    @Override
+    public void update(CategoryForUpdateDto request) {
+
+    }
+
     private void categoryWithSameNameSouldNotExist(String categoryName){
         //Business Rule => Aynı isimde iki kategory olmamalı
 
@@ -60,4 +76,6 @@ public class CategoryManager implements CategoryService {
         }
 
     }
+
+
 }

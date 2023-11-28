@@ -2,8 +2,9 @@ package com.turkcell.spring.starter.controllers;
 
 import com.turkcell.spring.starter.business.abstracts.CategoryService;
 import com.turkcell.spring.starter.entities.Category;
-import com.turkcell.spring.starter.entities.dtos.CategoryForAddDto;
-import com.turkcell.spring.starter.entities.dtos.CategoryForListingDto;
+import com.turkcell.spring.starter.entities.dtos.category.CategoryForAddDto;
+import com.turkcell.spring.starter.entities.dtos.category.CategoryForListingDto;
+import com.turkcell.spring.starter.entities.dtos.category.CategoryForUpdateDto;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -93,6 +94,17 @@ public class CategoriesController {
         //AutoMapper => ModelMapper
         return new ResponseEntity("Kategori Eklendi", HttpStatus.CREATED);
 
+
+    }
+
+    @DeleteMapping()
+    public void delete(int id){
+        categoryService.delete(id);
+
+    }
+
+    @PutMapping()
+    public void update(@RequestBody CategoryForUpdateDto request){
 
     }
 

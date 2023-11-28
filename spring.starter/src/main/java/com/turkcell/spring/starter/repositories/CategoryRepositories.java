@@ -1,7 +1,7 @@
 package com.turkcell.spring.starter.repositories;
 
 import com.turkcell.spring.starter.entities.Category;
-import com.turkcell.spring.starter.entities.dtos.CategoryForListingDto;
+import com.turkcell.spring.starter.entities.dtos.category.CategoryForListingDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,7 +32,7 @@ public interface CategoryRepositories extends JpaRepository<Category,Integer > {
     List<Category>searchNative(String categoryName);
 
     @Query(value="SELECT new " +
-            "com.turkcell.spring.starter.entities.dtos.CategoryForListingDto(c.categoryId, c.categoryName) From Category c")
+            "com.turkcell.spring.starter.entities.dtos.category.CategoryForListingDto(c.categoryId, c.categoryName) From Category c")
     List<CategoryForListingDto> getForListing();
 }
 

@@ -1,24 +1,26 @@
 package com.turkcell.spring.starter.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 
 @Table (name = "order_details")
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderDetail {
 
     @Id
-    @Column(name="order_id")
-    private int orderId;
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @Id
+    /*@Id
     @Column(name="product_id")
-    private int productId;
+    private int productId;*/
 
     @Column(name="unit_price")
     private float unitPrice;
@@ -28,4 +30,12 @@ public class OrderDetail {
 
     @Column(name="discount")
     private float discount;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }

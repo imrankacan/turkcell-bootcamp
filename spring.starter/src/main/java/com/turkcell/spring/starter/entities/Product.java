@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 
@@ -47,6 +49,9 @@ public class Product {
     @JoinColumn (name="category_id") // İlişki sağlanılan column
     @JsonIgnore //Bu alanı json a yazma(Sonsuz döngüye girmemesi için)
     private Category category;
+
+    @OneToMany(mappedBy = "product")
+    private List<OrderDetail> orderDetails;
 
 }
 //ORM = Object Relation Mapping

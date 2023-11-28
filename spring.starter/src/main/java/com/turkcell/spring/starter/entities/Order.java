@@ -1,29 +1,34 @@
 package com.turkcell.spring.starter.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Data
 
 @Table (name = "orders")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
 
     @Id
     @Column(name="order_id")
-    private int orderId;
+    @GeneratedValue (strategy = GenerationType.IDENTITY) //Auto Implement
+    private short orderId; //Smallint=> short
 
-    @Column(name="customer_id")
+    /*@Column(name="customer_id")
     private String customerId;
 
     @Column(name="employee_id")
-    private int employeeId;
+    private int employeeId;*/
 
     @Column(name="order_date")
-    private java.sql.Date orderDate;
+    private LocalDate orderDate;
 
     @Column(name="required_date")
     private java.sql.Date requiredDate;
@@ -31,8 +36,8 @@ public class Order {
     @Column(name="shipped_date")
     private java.sql.Date shippedDate;
 
-    @Column(name="ship_via")
-    private int shipVia;
+    //@Column(name="ship_via")
+    //private int shipVia;
 
     @Column(name="freight")
     private float freight;
@@ -54,4 +59,15 @@ public class Order {
 
     @Column(name="ship_country")
     private String shipCountry;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail>orderDetails;
 }

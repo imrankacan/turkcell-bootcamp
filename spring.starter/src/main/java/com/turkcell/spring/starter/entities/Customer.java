@@ -1,13 +1,16 @@
 package com.turkcell.spring.starter.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "customers") //tablonun adı
 @Entity
 public class Customer {
@@ -45,6 +48,9 @@ public class Customer {
 
     @Column(name="fax")
     private String faxn;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Order>orders;
 
 
 

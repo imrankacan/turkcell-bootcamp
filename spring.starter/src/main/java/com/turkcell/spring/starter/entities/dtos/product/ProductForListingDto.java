@@ -1,4 +1,4 @@
-package com.turkcell.spring.starter.entities.dtos;
+package com.turkcell.spring.starter.entities.dtos.product;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
