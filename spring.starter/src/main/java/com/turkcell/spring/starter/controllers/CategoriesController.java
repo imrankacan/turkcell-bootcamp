@@ -105,6 +105,8 @@ public class CategoriesController {
 
     @PutMapping()
     public void update(@RequestBody CategoryForUpdateDto request){
+        categoryService.update(request);
+
 
     }
 

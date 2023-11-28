@@ -54,15 +54,19 @@ public class CategoryManager implements CategoryService {
 
     @Override
     public void delete(int id) {
-        Category categoryToDelete = categoryRepositories.findById(id).orElse(null);
-        if(categoryToDelete==null) {
-            throw new BusinessException("Böyle Bir Kategori Bulunamamıştır.");
-        }
+
+        Category categoryToDelete = returnCategoryByIdIfExists(id);
         categoryRepositories.delete(categoryToDelete);
     }
 
     @Override
     public void update(CategoryForUpdateDto request) {
+        Category categoryToUpdate = returnCategoryByIdIfExists(request.getId());
+
+        categoryToUpdate.setDescription(request.getDescription());
+        categoryToUpdate.setCategoryName(request.getCategoryName());
+
+        categoryRepositories.save(categoryToUpdate);
 
     }
 
@@ -77,5 +81,11 @@ public class CategoryManager implements CategoryService {
 
     }
 
-
+    private Category returnCategoryByIdIfExists(int id){
+        Category categoryToDelete = categoryRepositories.findById(id).orElse(null);
+        if(categoryToDelete==null) {
+            throw new BusinessException("Böyle Bir Kategori Bulunamamıştır.");
+        }
+        return categoryToDelete;
+        }
 }
