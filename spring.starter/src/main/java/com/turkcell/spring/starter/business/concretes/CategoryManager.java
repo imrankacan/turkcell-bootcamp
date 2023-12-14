@@ -6,16 +6,16 @@ import com.turkcell.spring.starter.entities.Category;
 import com.turkcell.spring.starter.entities.dtos.category.CategoryForAddDto;
 import com.turkcell.spring.starter.entities.dtos.category.CategoryForListingDto;
 import com.turkcell.spring.starter.entities.dtos.category.CategoryForUpdateDto;
-import com.turkcell.spring.starter.repositories.CategoryRepositories;
+import com.turkcell.spring.starter.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 //Somut Classlar
 @Service
 public class CategoryManager implements CategoryService {
-    private final CategoryRepositories categoryRepositories; // Controller direk repository e erişememeli.
+    private final CategoryRepository categoryRepositories; // Controller direk repository e erişememeli.
 
-    public CategoryManager(CategoryRepositories categoryRepositories) {
+    public CategoryManager(CategoryRepository categoryRepositories) {
         this.categoryRepositories = categoryRepositories;
     }
 
@@ -45,7 +45,7 @@ public class CategoryManager implements CategoryService {
 
 
         categoryWithSameNameSouldNotExist(request.getCategoryName());
-        Category category = new Category();
+        Category category = Category.builder().build();
         category.setCategoryName(request.getCategoryName());
         category.setDescription(request.getDescription());
         //Mapleme İşlemi Business te

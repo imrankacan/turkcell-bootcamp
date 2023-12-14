@@ -74,7 +74,7 @@ public class CategoriesController {
     }
 
     @GetMapping("getById")
-    public Category getCategoryById(@RequestParam("id") int id){
+    public Category getCategoryById(@RequestParam("id") int id){ //değişken aynı isim ile kullanılacak ise @RequestParam kullanılmayabilir
         //Category category = categoryRepositories.findById(id).orElseThrow(); //Girilen id ye göre veri getirir, id ye ait veri yoksa hata fırlatır
         //return category;
         return null;

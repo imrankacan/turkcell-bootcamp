@@ -1,21 +1,21 @@
 package com.turkcell.spring.starter.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 
 @Table (name = "suppliers")
 @Entity
-
+@Builder
 public class Supplier {
 
     @Id
     @Column(name="supplier_id")
-    private int supplierId;
+    private short supplierId;
 
     @Column(name="company_name")
     private String companyName;
@@ -49,5 +49,8 @@ public class Supplier {
 
     @Column(name="homepage")
     private float homepage;
+
+    @OneToMany(mappedBy = "supplier")
+    private List<Product> products;
 
 }

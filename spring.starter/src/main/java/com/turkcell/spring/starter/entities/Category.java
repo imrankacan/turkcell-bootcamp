@@ -4,6 +4,7 @@ package com.turkcell.spring.starter.entities;
 // Çoğulluk durumlarını liste durumlarında kullanıyoruz
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,7 @@ import java.util.List;
 //@Data => Getter and Setter
 @Table(name = "categories") //tablonun adı
 @Entity //database entitysi olarak kullanılacağını belirtmek için
-
+@Builder
 public class Category {
     @Id //primary key olduğu için
     @Column(name="category_id")

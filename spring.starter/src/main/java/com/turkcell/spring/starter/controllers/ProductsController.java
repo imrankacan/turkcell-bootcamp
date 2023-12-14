@@ -1,7 +1,11 @@
 package com.turkcell.spring.starter.controllers;
 
 import com.turkcell.spring.starter.business.abstracts.ProductService;
+import com.turkcell.spring.starter.entities.dtos.product.ProductForAddDto;
 import com.turkcell.spring.starter.entities.dtos.product.ProductForListingDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +18,7 @@ public class ProductsController {
 
     private final ProductService productService;
 
+    @Autowired
     public ProductsController(ProductService productService) {
         this.productService = productService;
     }
@@ -53,4 +58,9 @@ public class ProductsController {
 
 */
 
+    @PostMapping()
+    public ResponseEntity add(@RequestBody ProductForAddDto request){
+        productService.add(request);
+        return new ResponseEntity("Ürün Eklendi", HttpStatus.CREATED);
+    }
 }

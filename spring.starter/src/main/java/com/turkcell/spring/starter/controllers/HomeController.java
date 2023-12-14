@@ -54,7 +54,7 @@ public class HomeController {
     // Route => localhost:8080/home/getById/1
     @GetMapping("getById")
     public Product getById(@RequestParam("id") int id){ //id alanı verilen değer olarak güncellenir.
-        Product product = new Product();
+        Product product = Product.builder().build(); //Build eklediğimiz için product a bu şekilde newledik.
         product.setProductId(id);
         product.setProductName("Laptop");
         return product;

@@ -2,6 +2,7 @@ package com.turkcell.spring.starter.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Table (name = "products")
 @Entity
+@Builder
 public class Product {
 
     @Id
@@ -21,8 +23,8 @@ public class Product {
     @Column(name="product_name")
     private String productName;
 
-    @Column(name="supplier_id")
-    private int supplierId;
+   // @Column(name="supplier_id")
+    //private int supplierId;
 
    /* @Column(name="category_id")
     private int categoryId;*/
@@ -52,6 +54,10 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> orderDetails;
+
+    @ManyToOne()
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 
 }
 //ORM = Object Relation Mapping

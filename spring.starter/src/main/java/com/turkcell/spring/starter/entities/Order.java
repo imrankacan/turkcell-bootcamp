@@ -60,6 +60,7 @@ public class Order {
     @Column(name="ship_country")
     private String shipCountry;
 
+    //Foreign Key Alanları
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
