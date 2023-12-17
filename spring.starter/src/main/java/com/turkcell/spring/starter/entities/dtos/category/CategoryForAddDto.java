@@ -12,7 +12,7 @@ import lombok.Data;
 public class CategoryForAddDto {
 
     @NotBlank(message = "Kategori Adı Girmek Zorunludur") //categoryName boş olamaz (Validation) https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/package-summary
-    @Size(min = 3)
+    @Size(min = 3, message = "{categoryNameShouldBeMinimum}")
     // Controller da çağırdığımız yerde @Valid demeliyiz.
     private String categoryName;
 
