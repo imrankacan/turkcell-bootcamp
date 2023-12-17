@@ -1,6 +1,9 @@
 package com.turkcell.spring.starter.controllers;
 
 import com.turkcell.spring.starter.entities.Product;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +14,7 @@ import java.util.List;
 
 @RestController //Controller olduğunu tanıtmak için
 @RequestMapping("home")// http://localhost:8080/home dizinin de çalışacak komutlar
-
+@RequiredArgsConstructor
 //METHOD ==> GET, POST, PUT, DELETE
 // GET = Cevap olarak bir kaynak dönüleceği durumlarda (ürünleri listeleme fonk)
 // POST = Bir kaynak oluşturulması isteği (ürün ekleme fonk.)
@@ -20,12 +23,15 @@ import java.util.List;
 
 
 public class HomeController {
+
+    private final MessageSource messageSource;
     List<Product>productList = new ArrayList<>();
 
     // http://localhost:8080/home/index
     @GetMapping("index")
     public String get(){
-        return "Merhaba Turkcell";
+
+        return messageSource.getMessage("hello", null, LocaleContextHolder.getLocale());
     }
 
 
