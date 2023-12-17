@@ -2,26 +2,29 @@ package com.turkcell.spring.starter.business.concretes;
 
 import com.turkcell.spring.starter.business.abstracts.OrderDetailService;
 import com.turkcell.spring.starter.business.abstracts.OrderService;
-import com.turkcell.spring.starter.business.exceptions.BusinessException;
 import com.turkcell.spring.starter.entities.Customer;
 import com.turkcell.spring.starter.entities.Employee;
 import com.turkcell.spring.starter.entities.Order;
 import com.turkcell.spring.starter.entities.dtos.order.OrderForAddDto;
 import com.turkcell.spring.starter.repositories.OrderRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
 @Service
+@RequiredArgsConstructor // Servislerde Constructerları otomotik oluşturması için kullanabiliriz
 public class OrderManager implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderDetailService orderDetailService;
+    private final ModelMapper modelMapper;
 
-    public OrderManager(OrderRepository orderRepository, OrderDetailService orderDetailService) {
+   /* public OrderManager(OrderRepository orderRepository, OrderDetailService orderDetailService) {
         this.orderRepository = orderRepository;
         this.orderDetailService = orderDetailService;
-    }
+    }*/
 
     @Override
     @Transactional //Metot başarılı bir şekilde tamamlandıktan sonra işlemleri kaydeder (Ör Para Havale)
