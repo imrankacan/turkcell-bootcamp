@@ -10,6 +10,8 @@ import com.turkcell.spring.starter.repositories.OrderRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -32,6 +34,8 @@ public class OrderManager implements OrderService {
         //Order i DB ye kaydet, order in bir id si oluşsun
         // Olusan id yi ve itemleri orderDetail Service gönder o da bu id ye detay eklemeleri yapsın
 
+
+        /* Manuel Mapleme
         Order order = Order.builder()
                 .customer(Customer.builder().customerId(request.getCustomerId()).build())
                 .orderDate(LocalDate.now())//O anın saatini alır
@@ -40,13 +44,16 @@ public class OrderManager implements OrderService {
                 .ship_address(request.getShipAddress())
                 //.shipCity(request.getShipCity())
                 //.shipName(request.getShipName())
-                .build();
-        order = orderRepository.save(order);
+                .build();*/
+
+        Order orderFromAutoMapping = modelMapper.map(request, Order.class); //Request kaynağını kullanarak, order.class türünde obje üret
+
+        orderFromAutoMapping = orderRepository.save(orderFromAutoMapping);
         //Bu satırdan sonra order in id alanı set edilmiş olacak
 
         //throw new BusinessException(".");
 
-        orderDetailService.addItemsToOrder(order, request.getItems());
+        orderDetailService.addItemsToOrder(orderFromAutoMapping, request.getItems());
 
     }
 }
